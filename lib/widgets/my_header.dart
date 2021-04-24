@@ -3,19 +3,27 @@ import 'package:flutter_covid_19/constant.dart';
 import 'package:flutter_covid_19/info_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class MyHeader extends StatelessWidget {
+class MyHeader extends StatefulWidget {
   final String image;
   final String textTop;
   final String textBottom;
+  final double offset;
   const MyHeader({
     Key key,
     this.image,
     this.textTop,
     this.textBottom,
+    this.offset,
   }) : super(key: key);
 
   @override
+  _MyHeaderState createState() => _MyHeaderState();
+}
+
+class _MyHeaderState extends State<MyHeader> {
+  @override
   Widget build(BuildContext context) {
+    print(widget.offset.toString());
     return ClipPath(
       clipper: MyClipper(),
       child: Container(
@@ -32,7 +40,7 @@ class MyHeader extends StatelessWidget {
             end: Alignment.bottomLeft,
             colors: [
               Color(0xFF3383CD),
-              Color(0xFF11249D),
+              Color(0xFF11249F),
             ],
           ),
           image: DecorationImage(
@@ -40,39 +48,39 @@ class MyHeader extends StatelessWidget {
           ),
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: GestureDetector(
-                child: SvgPicture.asset('assets/icons/menu.svg'),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return InfoScreen();
-                      },
-                    ),
-                  );
-                },
-              ),
+            GestureDetector(
+              child: SvgPicture.asset('assets/icons/menu.svg'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return InfoScreen();
+                    },
+                  ),
+                );
+              },
             ),
             SizedBox(height: 20),
             Expanded(
               child: Stack(
                 children: [
-                  SvgPicture.asset(
-                    image,
-                    width: 230,
-                    fit: BoxFit.fitWidth,
-                    alignment: Alignment.topCenter,
+                  Positioned(
+                    top: (widget.offset < 0) ? 0 : widget.offset,
+                    child: SvgPicture.asset(
+                      widget.image,
+                      width: 230,
+                      fit: BoxFit.fitWidth,
+                      alignment: Alignment.topCenter,
+                    ),
                   ),
                   Positioned(
-                    top: 20,
+                    top: 20 - widget.offset / 2,
                     left: 150,
                     child: Text(
-                      '$textTop \n$textBottom',
+                      '${widget.textTop} \n${widget.textBottom}',
                       style: kHeadingTextStyle.copyWith(
                         color: Colors.white,
                       ),
