@@ -1,16 +1,12 @@
-# flutter_covid_19
+# COVID-19 App - Flutter UI
+Source code as instructed on [video tutorial](https://youtu.be/zx6uMCoW2gQ)
 
-A new Flutter project.
+## Packages using:
 
-## Getting Started
+- [google_fonts](https://pub.dev/packages/google_fonts)
+- [flutter_svg](https://pub.dev/packages/flutter_svg)
 
-This project is a starting point for a Flutter application.
+## Screen
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- home
+- info_screen
